@@ -1,19 +1,29 @@
+import 'package:chat/utils/secrets.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
 class ZIMService {
   void initZego() {
-    ZIMKit().init(
-      appID: 713906771,
-      appSign:
-          "1012b1b3ab2af4815b46f314b90967fca85e666df9dd0e44272253229a943e62",
-    );
+    ZIMKit().init(appID: Secrets.appID, appSign: Secrets.appSign);
   }
 
   Future<void> connect(String id, String name) async {
     await ZIMKit().connectUser(id: id.trim(), name: name.trim());
+    await initCallInvitationService(id, name);
   }
 
   Future<void> disconnect() async {
     await ZIMKit().disconnectUser();
+  }
+
+  Future<void> initCallInvitationService(String id, String name) async {
+    await ZegoUIKitPrebuiltCallInvitationService().init(
+      appID: Secrets.appID,
+      appSign: Secrets.appSign,
+      userID: id,
+      userName: name,
+      plugins: [ZegoUIKitSignalingPlugin()],
+    );
   }
 }

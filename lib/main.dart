@@ -1,26 +1,18 @@
-import 'package:chat/utils/storage_service.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'app.dart';
-import 'services/zim_service.dart';
+import 'firebase_options.dart';
+import 'services/zego_initializer.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ZIMService().initZego();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  final prefs = await SharedPreferences.getInstance();
-  final userId = prefs.getString('userId');
-  final userName = prefs.getString('userName');
+  await initializeZego(navigatorKey); // ← تم نقل التهيئة هنا
 
-  bool loggedIn = false;
-  if (userId != null && userName != null && userId.trim().isNotEmpty) {
-    try {
-      await ZIMService().connect(userId, userName);
-      loggedIn = true;
-    } catch (_) {
-      await StorageHelper.clearUser();
-    }
-  }
-
-  runApp(const MyApp());
+  runApp(MyApp(navigatorKey: navigatorKey));
 }
