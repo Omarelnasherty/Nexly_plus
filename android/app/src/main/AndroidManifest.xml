@@ -22,7 +22,7 @@
 
 
     <application
-        android:label="chat"
+        android:label="Nexly +"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

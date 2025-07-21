@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 12),
                 const Text(
-                  "Let's get started by creating your profile",
+                  "Before we jump in—let’s get to know you! 😄",
                   style: TextStyle(fontSize: 16, color: Colors.black54),
                 ),
                 const SizedBox(height: 32),
