@@ -1,6 +1,4 @@
 
-
-````markdown
 # Nexly Plus 💬
 
 **Nexly Plus** is a modern, real-time communication app built using **Flutter**, designed to provide a seamless messaging and calling experience. It integrates **ZEGOCLOUD** for chat, voice, and video communication, and uses **Firebase Authentication** for secure phone-based login.
